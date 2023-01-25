@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+# -*- coding: utf-8 -*-
 # Import the required modules
 from bs4 import BeautifulSoup as bs
 import requests
@@ -74,12 +74,14 @@ if __name__ == '__main__':
     # Create an integer to increment with every loop for indexing the files
     inte = 1
 
-    # Make a folder with the title of the page if it doesn't exist
-    if not os.path.exists(scrapLinks(url, file, cookies, links, inte).get_title()):
-        os.mkdir(scrapLinks(url, file, cookies, links).make_folder())
-    # Change the directory to the folder
-    os.chdir(scrapLinks(url, file, cookies, links, inte).get_title())
-
+# Make a folder with the title of the page if it doesn't exist
+    if os.path.exists(scrapLinks(url, file, cookies, links, inte).get_title()):
+        # Change the directory to the folder with the title of the page
+        os.chdir(scrapLinks(url, file, cookies, links, inte).get_title())
+    else:
+        # Make a folder with the title of the page
+        os.mkdir(scrapLinks(url, file, cookies, links, inte).make_folder())
+        
     # Get the list of all the links
     links = scrapLinks(url, file, cookies, links, inte).get_list()
     # Get the content of all the links
